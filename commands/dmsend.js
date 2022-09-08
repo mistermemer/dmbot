@@ -3,9 +3,8 @@ exports.run = async (client, message, args) => {
     let user = message.mentions.members.first()
     if(!user) return message.reply(`Sorry, but you need to mention a user.`)
 if(args.length < 1) return message.reply(`Please mention a message which should be sent`);
-    let msg = args.splice(0, 1)
-    msg = msg.join(' ')
-    await user.send(msg)
+
+    await user.send(args.join(' '))
     message.reply(`This message was sent to ${user}`)
     
 
