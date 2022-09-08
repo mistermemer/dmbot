@@ -3,6 +3,7 @@ exports.run = async (client, message, args) => {
     let user = message.mentions.members.first()
     if(!user) return message.reply(`Sorry, but you need to mention a user.`)
     await message.channel.send(`>>> Please enter the message you would like to send to this user.`)
+    let filter = (m) => m.author.id === message.author.id;
     await message.channel.awaitMessages({
         filter,
         max: 1,
@@ -10,7 +11,8 @@ exports.run = async (client, message, args) => {
     }).then(collected => {
         if(collected.content.length < 5) return message.channel.send(`Message content must be over 5 charecters.`);
         try {
-            user.send(`${collected.content}`)
+            await user.send(`${collected.content}`)
+            message.reply(`Message has been sent to this user!`)
         } catch(e) {
             message.reply(`User cannot be dmed, so sad xd`)
         }
