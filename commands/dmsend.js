@@ -5,22 +5,25 @@ exports.run = async (client, message, args) => {
     let filter = (m) => m.author.id === message.author.id
     message.channel.send(`>>> Please enter the message you would like to send to this user.`)
    
-    await message.channel.awaitMessages({
-        filter,
-        max: 1,
-        time: 90000
-    }).then(async(collected) => {
-        if(collected.content.length < 5) return message.channel.send(`Message content must be over 5 charecters.`);
-        try {
-            await user.send(`${collected.content}`)
-            message.reply(`Message has been sent to this user!`)
-        } catch(e) {
-            message.reply(`User cannot be dmed, so sad xd`)
-        }
-
-    }).catch(() => {
-        message.reply('No answer after 90 seconds, please try the command again.');
-        status = 1
+let col = message.channel.createMessageCollector({time: 90000})
+col.on('collect', async(i) => {
+    if(i.author.id !== message.author.id) return;
+    if(i.content < 5){
+        i.reply(`Please enter a message between 5 to 200 charecters.`)
+        col.stop('err')
+        return;
+    }
+    try {
+       await user.send(i.content)
+        i.reply(`This message has been sent to ${user}`)
+        col.stop('done')
+    } catch(e){
+        i.reply(`Cant send DMs to this user.`)
+    }
+})
+    col.on('end', async(x, y) => {
+        if(y !== 'done') return message.reply(`You did not respond with a proper message, try again later.`)
     })
+    
 
 }
