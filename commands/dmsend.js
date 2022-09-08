@@ -3,9 +3,9 @@ exports.run = async (client, message, args) => {
     let user = message.mentions.members.first()
     if(!user) return message.reply(`Sorry, but you need to mention a user.`)
     await message.channel.send(`>>> Please enter the message you would like to send to this user.`)
-    let filter = (m) => m.author.id === message.author.id;
+   
     await message.channel.awaitMessages({
-        filter,
+        (m) => m.author.id === message.author.id,
         max: 1,
         time: 90000
     }).then(async(collected) => {
