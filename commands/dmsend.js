@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
         filter,
         max: 1,
         time: 90000
-    }).then(collected => {
+    }).then(async(collected) => {
         if(collected.content.length < 5) return message.channel.send(`Message content must be over 5 charecters.`);
         try {
             await user.send(`${collected.content}`)
