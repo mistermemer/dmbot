@@ -2,8 +2,8 @@ exports.run = async (client, message, args) => {
     if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply(`You need \`manage_guild\` permissions for that.`)
     let user = message.mentions.members.first()
     if(!user) return message.reply(`Sorry, but you need to mention a user.`)
-    let filter = (m) => m.author.id === message.author.id,
-    await message.channel.send(`>>> Please enter the message you would like to send to this user.`)
+    let filter = (m) => m.author.id === message.author.id
+    message.channel.send(`>>> Please enter the message you would like to send to this user.`)
    
     await message.channel.awaitMessages({
         filter,
