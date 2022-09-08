@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
 
     message.channel.send(`>>> Please enter the message you would like to send to this user.`)
    
-let col = message.channel.createMessageCollector({time: 90000})
+let col = await message.channel.createMessageCollector({time: 90000})
 col.on('collect', async(i) => {
     if(i.author.id !== message.author.id) return;
     if(i.content < 5){
