@@ -13,13 +13,11 @@ col.on('collect', async(i) => {
         col.stop('err')
         return;
     }
-    try {
+    
        await user.send(i.content)
         i.reply(`This message has been sent to ${user}`)
         col.stop('done')
-    } catch(e){
-        i.reply(`Cant send DMs to this user.`)
-    }
+   
 })
     col.on('end', async(x, y) => {
         if(y !== 'done') return message.reply(`You did not respond with a proper message, try again later.`)
