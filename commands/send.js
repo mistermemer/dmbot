@@ -5,16 +5,16 @@ let role = await message.guild.roles.cache.get(args[0]);
 if(!role) return message.reply(`You must provide a valid role ID`);
 if(!args[1]) return message.reply(`You must provide a message which should be sent.`);
 let msg = args.splice(1, args.length);
-await role.members.forEach((x) => {
+await role.members.forEach(async(x) => {
     try{
-    x.send(`Important Message: \n\n\`\`\`\n${msg}\n\`\`\``)
+    await x.send(`Important Message: \n\n\`\`\`\n${msg}\n\`\`\``)
     }catch(e){
         console.log(e)
     }
 })
 message.reply(`Sent this message to every user.`)
 
-    await user.send(args.join(' '))
+    
     message.reply(`This message was sent to ${user}`)
     
 
