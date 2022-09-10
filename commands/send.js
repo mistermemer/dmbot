@@ -15,7 +15,7 @@ await role.members.forEach(async(x) => {
 message.reply(`Sent this message to every user.`)
 
     
-    message.reply(`This message was sent to ${user}`)
+    
     
 
 }
