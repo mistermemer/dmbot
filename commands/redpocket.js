@@ -32,6 +32,7 @@ exports.run = async (client, message, args, db) => {
             if (array.includes(i.user.id)) return i.followUp({ content: `You have already claimed this.`, ephemeral: true })
             array.push(i.user.id)
             db.add(`coins_${i.user.id}`, get)
+            i.followUp({content: 'Congrats!, you got' + get.toLocaleString() + ' coins.', ephemeral: true})
         }
     })
 
