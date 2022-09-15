@@ -12,7 +12,7 @@ exports.run = async (client, message) => {
     .map((x) => "• " + "``" + '!' + x.trim())
     .join("\n");
 
-  message.channel.send(
+  message.channel.send({embeds: [
     new MessageEmbed()
       .setAuthor(
         "Googly Commands Help",
@@ -21,5 +21,5 @@ exports.run = async (client, message) => {
       .setColor("GREEN")
       .setTimestamp()
       .setDescription(revised)
-  );
+      ]})
 };
