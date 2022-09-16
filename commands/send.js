@@ -1,6 +1,8 @@
 exports.run = async (client, message, args) => {
-    if (!message.member.hasPermission('MANAGE_GUILD')) return message.reply(`You need \`manage_guild\` permissions for that.`)
-if(!args[0]) return message.reply(`Please mention a role id.`);
+    if (!message.member.permissions.has("MANAGE_GUILD")) {
+        return message.channel.send(`Not Today not today.. u need to have permissions \`MANAGE_SERVER\` For That!`);
+    }
+    if(!args[0]) return message.reply(`Please mention a role id.`);
 let role = await message.guild.roles.cache.get(args[0]);
 if(!role) return message.reply(`You must provide a valid role ID`);
 if(!args[1]) return message.reply(`You must provide a message which should be sent.`);
