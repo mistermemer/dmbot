@@ -10,7 +10,10 @@ let msg = args.splice(1, args.length);
 msg = msg.join(' ');
 await role.members.forEach((x) => {
 
-x.send(`Important Message: \n\n\`\`\`\n${msg}\n\`\`\``).catch(() => message.reply(`Can't send DMs to ${x.user.username}`));
+x.send(`Important Message: \n\n\`\`\`\n${msg}\n\`\`\``).catch((e) => {
+    message.reply(`Can't send DMs to ${x.user.username}`)
+console.log(e)
+});
 
 })
 message.reply(`Sent this message to every user.`)
